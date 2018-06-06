@@ -33,7 +33,7 @@ emails.each do |email|
   emaildupes.push dupemails
 end
 
-display_dup_sets(emaildupes)
+# display_dup_sets(emaildupes)
 
 # dedupe based on phone no's
 
@@ -47,12 +47,34 @@ phones.uniq!
 
 phonedupes = []
 
+# phones.each do |phone|
+#   dupephones = []
+#   lines.each do |row|
+#     dupephones.push row if row[11] == phone
+#   end
+#   phonedupes.push dupephones
+# end
+
 phones.each do |phone|
   dupephones = []
-  lines.each do |row|
-    dupephones.push row if row[11] == phone
+  emaildupes.each do |emaildup|
+    emaildup.each do |dup|
+      # p dup[11]
+      # p phone
+      if dup[11] == phone
+        emaildup.each do |dup1|
+          dupephones.push dup1
+        end
+        break
+      end
+    end
   end
-  phonedupes.push dupephones
+  phonedupes.push(dupephones)
 end
 
+# p phonedupes
+phonedupes.uniq!
+
 display_dup_sets(phonedupes)
+
+p phonedupes.count
