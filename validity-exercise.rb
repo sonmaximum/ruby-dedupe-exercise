@@ -4,12 +4,13 @@ require 'csv'
 lines = CSV.read('Validity-Take-Home-Exercise.csv', headers: true)
 
 def display_dup_sets(dupset)
-  # take a list grouped by duplicate and display them
+  # take a list grouped by duplicates and display them
   setcount = 1
   dupset.each do |set|
     if set.length > 1
       puts "Duplicate Set #{setcount}:"
       set.each do |dup|
+        # displays "ID #: FirstName LastName, Company, Address, City, State, Zip, PhoneNo., Email"
         puts "ID #{dup[0]}: #{dup[1]} #{dup[2]}, #{dup[3]}, #{dup[5]}, #{dup[8]}, #{dup[10]} #{dup[7]}, #{dup[11]}, #{dup[4]}"
       end
       puts ''
@@ -48,8 +49,6 @@ emails.each do |email|
   emaildupes.push dupemails
 end
 
-# display_dup_sets(emaildupes)
-
 # dedupe based on phone no's
 
 phones = []
@@ -62,6 +61,7 @@ phones.uniq!
 
 phonedupes = []
 
+# if deduping only on phones:
 # phones.each do |phone|
 #   dupephones = []
 #   lines.each do |row|
@@ -70,12 +70,11 @@ phonedupes = []
 #   phonedupes.push dupephones
 # end
 
+# double de-dup on phone after email
 phones.each do |phone|
   dupephones = []
   emaildupes.each do |emaildup|
     emaildup.each do |dup|
-      # p dup[11]
-      # p phone
       if dup[11] == phone
         emaildup.each do |dup1|
           dupephones.push dup1
@@ -87,9 +86,7 @@ phones.each do |phone|
   phonedupes.push(dupephones)
 end
 
-# p phonedupes
 phonedupes.uniq!
 
 display_dup_sets(phonedupes)
 
-# p phonedupes.count
