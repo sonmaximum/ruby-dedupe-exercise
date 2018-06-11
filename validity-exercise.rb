@@ -5,10 +5,25 @@ lines = CSV.read('Validity-Take-Home-Exercise.csv', headers: true)
 
 def display_dup_sets(dupset)
   # take a list grouped by duplicate and display them
+  setcount = 1
   dupset.each do |set|
-    p 'Dup set'
-    set.each do |dup|
-      print dup
+    if set.length > 1
+      puts "Duplicate Set #{setcount}:"
+      set.each do |dup|
+        puts "ID #{dup[0]}: #{dup[1]} #{dup[2]}, #{dup[3]}, #{dup[5]}, #{dup[8]}, #{dup[10]} #{dup[7]}, #{dup[11]}, #{dup[4]}"
+      end
+      puts ''
+      setcount += 1
+    end
+  end
+  puts ''
+  puts ''
+  puts 'Non-Duplicates'
+  dupset.each do |set|
+    if set.length == 1
+      set.each do |dup|
+        puts "ID #{dup[0]}: #{dup[1]} #{dup[2]}, #{dup[3]}, #{dup[5]}, #{dup[8]}, #{dup[10]} #{dup[7]}, #{dup[11]}, #{dup[4]}"
+      end
     end
   end
 end
@@ -77,4 +92,4 @@ phonedupes.uniq!
 
 display_dup_sets(phonedupes)
 
-p phonedupes.count
+# p phonedupes.count
