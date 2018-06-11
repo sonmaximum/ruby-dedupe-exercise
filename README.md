@@ -11,7 +11,7 @@ ruby validity-exercise.rb Validity-Take-Home-Exercise.csv lev
 
 ## Explanation:
 
-The goal of this exercise was to write a script in ruby to identify potential duplicates in a CSV file.
+The goal of this exercise was to write a script in ruby to identify potential duplicates in a CSV file.  Upon running the script, information is printed back to the terminal.
 
 My first solution makes use of the fact that both phone numbers and email addresses should be unique to a user, and it's somewhat unlikely that a user would make a typo in both fields.  So it checks for uniqueness in these two columns, sequentially.
 
